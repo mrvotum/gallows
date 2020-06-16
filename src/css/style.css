@@ -41,7 +41,7 @@ input, div {
 
 .widget {
     width: 100%;
-    margin-top: 10%;
+    margin-top: 10px;
 }
 
 .widget__header {
@@ -67,7 +67,7 @@ input, div {
 
 
 .letter {
-    display: inline-block;
+    display: table;
     text-transform: uppercase;
     font-size: 32px;
     margin-right: 20px;

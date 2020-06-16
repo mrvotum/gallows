@@ -6,6 +6,7 @@ export default class GameWindow {
     this.parent = document.querySelector('[data-id=content]');
     this.word = word;
     this.errorsCounter = 0;
+    console.log(`Загаданное слово: ${this.word}`);
   }
 
   create() {

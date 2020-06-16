@@ -6,7 +6,7 @@ body {
 div {
     box-sizing: border-box;
 }
-ul, li, span, p, h1, h2, h3, h4, h5, h6,
+span, p, h1, h2, h3, h4, h5, h6,
 input, div {
     margin: 0;
     padding: 0;
@@ -64,7 +64,15 @@ input, div {
     justify-content: space-between;
 }
 
-
+input:invalid {
+    border: 5px solid red;
+}
+input:valid {
+    border: 2px solid green;
+}
+input:focus {
+    outline: none;
+}
 
 .letter {
     display: table;
@@ -119,6 +127,13 @@ input, div {
 .letter_known {
     border-bottom: 2px solid #000;
     margin-right: 10px;
+}
+
+.rulesWindow {
+    background-color: #974134;
+    left: 0;
+    top: 0;
+    position: absolute;
 }
 
 

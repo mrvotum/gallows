@@ -8,7 +8,7 @@ export default class Widget {
   }
 
   create() {
-    this.addListener();  
+    this.addListener();
   }
 
   addListener() {

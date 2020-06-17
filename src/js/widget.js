@@ -26,13 +26,33 @@ export default class Widget {
   }
 
   wordInputWindow() {
-    const divElHeader = document.createElement('div');
-    divElHeader.className = 'interTheWord';
-    divElHeader.setAttribute('data-id', 'interTheWord__window');
-    divElHeader.innerHTML = `
-      <input class="wordInput" data-id="wordInput" type="text" placeholder="Введите существительное" pattern="[А-Яа-яЁё]+" required>
-      <span class="submit_btn" data-id="submit_btn">Принять</span>`;
+    const formEl = document.createElement('form');
+    formEl.className = 'interTheWord';
+    formEl.setAttribute('data-id', 'interTheWord__window');
+    formEl.innerHTML = `
+    <div class="interTheWord_content__holder">
+      <div class="interTheWord_title">
+        <h3 class="tittle">Придумайте слово:</h3>
+      </div>
+      <div class="interTheWord_content">
+        <input class="wordInput" data-id="wordInput" type="text" placeholder="Введите слово" pattern="[А-Яа-яЁё]+" required>
+        <span class="submit_btn" data-id="submit_btn">Принять</span>
+      </div>
+        </div>
+        <div class="interTheWord_content__holder">
+      <div class="interTheWord_title">
+        <h3 class="tittle">Уровень сложности:<h3>
+      </div>
+      <div class="interTheWord_content links_holder">
+        <input class="radio_btn" type="radio" value="easy" name="level" id="easy">
+        <input class="radio_btn" type="radio" value="normal" name="level" id="normal" checked>
+        <input class="radio_btn" type="radio" value="hard" name="level" id="hard">
+        <label class="radio_label" for="easy" id="easy_label">Лёгкий</label>
+        <label class="radio_label" for="normal" id="normal_label">Средний</label>
+        <label class="radio_label" for="hard" id="hard_label">Сложный</label>
+      </div>
+    </div>`;
 
-    this.parent.appendChild(divElHeader);
+    this.parent.appendChild(formEl);
   }
 }

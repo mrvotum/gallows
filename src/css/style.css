@@ -12,32 +12,115 @@ input, div {
     padding: 0;
 }
 
+/* Стили формы ввода слова */
 .interTheWord {
+    min-width: 450px;
+    padding: 40px;
+    background-color: #191919;
     position: absolute;
-    padding: 120px 130px;
-    left: 50%;
     top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(145, 87, 87);
+    text-align: center;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+}
+
+.interTheWord_content__holder:first-child {
+  position: relative;
+  width: 60%;
+}
+.interTheWord_content__holder:first-child::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  right: 5px;
+  width: 1px;
+  height: 100%;
+  background-color: #2ecc71;
+  opacity: .2;
+}
+
+.tittle {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 100;
 }
 
 .wordInput {
-    font-size: 32px;
-}
-
-.submit_btn {
-    margin-top: 10px;
-    padding: 10px 5px;
-    background-color: rgb(238, 238, 238);
-    display: inline-block;
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
     text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px;
+    width: 180px;
+    outline: none;
+    color: #fff;
+    border-radius: 50px;
+    transition: 0.25s;
+    font-size: 18px;
 }
-.submit_btn:hover {
+  
+.wordInput:focus {
+    width: 205px;
+    border-color: #2ecc71;
+}
+.wordInput:invalid {
+    border: 2px solid rgb(122, 2, 2);
+}
+.wordInput:invalid + .submit_btn {
+    border: 2px solid #424242;
+    background-color: #424242;
+    color: #020202;
+}
+.wordInput:valid {
+    border: 2px solid #2ecc71;
+}
+  
+.submit_btn {
+    border: 0;
+    background: none;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 10px 30px;
+    outline: none;
+    color: #fff;
+    border-radius: 50px;
+    transition: 0.25s;
     cursor: pointer;
 }
+.submit_btn:hover {
+    background-color: #2ecc71;
+}
+
+.links_holder {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.radio_btn {
+  display: none;
+  cursor: pointer;
+}
+
+.radio_label:hover {
+  color: #aff0ca;
+}
+
+#easy:checked ~ #easy_label{
+  color: #2ecc71;
+}
+#normal:checked ~ #normal_label{
+  color: #2ecc71;
+}
+#hard:checked ~ #hard_label{
+  color: #2ecc71;
+}
+/* Стили формы ввода слова */
+
 
 .widget {
     width: 100%;
@@ -62,16 +145,6 @@ input, div {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-}
-
-input:invalid {
-    border: 5px solid red;
-}
-input:valid {
-    border: 2px solid green;
-}
-input:focus {
-    outline: none;
 }
 
 .letter {

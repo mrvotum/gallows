@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import GameWindow from './gameWindow';
 import AdditionalFunctions from './additionalFunctions';
 

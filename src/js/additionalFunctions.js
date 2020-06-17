@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import Widget from './widget';
 
 export default class AdditionalFunctions {

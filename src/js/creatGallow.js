@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import AdditionalFunctions from './additionalFunctions';
 
 export default class CreatGallow {
@@ -123,6 +124,7 @@ export default class CreatGallow {
               { x: this.coordinatessArr[65], y: this.coordinatessArr[85] },
             ];
             this.animation(points, ctx);
+            // eslint-disable-next-line max-len
             new AdditionalFunctions(null, this.parent).createFinishWindow(false, this.word, this.clickedLetters, this.level, this.showedCounter);
           }, 1600);
           // Человек

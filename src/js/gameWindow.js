@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable import/no-cycle */
 import lettersArr from './lettersArr';
 import CreatGallow from './creatGallow';
 import AdditionalFunctions from './additionalFunctions';

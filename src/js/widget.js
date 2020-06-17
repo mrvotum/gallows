@@ -1,5 +1,5 @@
 import GameWindow from './gameWindow';
-import Validator from './validator';
+import AdditionalFunctions from './additionalFunctions';
 
 export default class Widget {
   constructor() {
@@ -15,11 +15,14 @@ export default class Widget {
 
   addListener() {
     this.submit_btn = document.querySelector('[data-id=submit_btn]');
+
     this.submit_btn.addEventListener('click', () => {
+      this.level = document.querySelector('input[name=level]:checked').value;
+
       const word = document.querySelector('[data-id=wordInput]');
-      const hiddenWord = new Validator(word, this.parent);
+      const hiddenWord = new AdditionalFunctions(word, this.parent);
       if (hiddenWord.validateTheWord()) {
-        new GameWindow(word.value.toLowerCase()).create();
+        new GameWindow(word.value.toLowerCase()).create(this.level);
         this.interTheWordWIndow.remove();
       }
     });

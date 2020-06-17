@@ -1,26 +1,30 @@
 import lettersArr from './lettersArr';
 import CreatGallow from './creatGallow';
+import AdditionalFunctions from './additionalFunctions';
 
 export default class GameWindow {
   constructor(word) {
     this.parent = document.querySelector('[data-id=content]');
     this.word = word;
     this.errorsCounter = 0;
-    console.log(`Загаданное слово: ${this.word}`);
+    this.showedCounter = 0;
+    this.clickedLetters = 0;
   }
 
-  create() {
+  create(level) {
+    this.level = level;
     this.createGameWindow();
     this.createLetters();
     this.addListener();
     this.createHiddenWord();
-    new CreatGallow().create();
+    new CreatGallow(this.parent).create();
   }
 
   addListener() {
     this.lettersHolder.addEventListener('click', (event) => {
       event.preventDefault();
       if (event.target.className === 'letter' && event.target.className !== 'checked') {
+        this.clickedLetters += 1;
         const clickedLetter = document.querySelector(`[letterid=${event.target.textContent}]`);
         clickedLetter.classList.add('checked');
         this.checking(event.target.textContent);
@@ -42,6 +46,7 @@ export default class GameWindow {
   createGameWindow() {
     const divElHeader = document.createElement('div');
     divElHeader.className = 'widget__header';
+    divElHeader.setAttribute('data-id', 'widget__header');
     divElHeader.innerHTML = `
           <div class="gallow__holder" data-id="gallow__holder"></div>
           <div class="letters__holder" data-id="letters__holder"></div>`;
@@ -50,6 +55,7 @@ export default class GameWindow {
 
     const divElFooter = document.createElement('div');
     divElFooter.className = 'widget__footer';
+    divElFooter.setAttribute('data-id', 'widget__footer');
     divElFooter.innerHTML = '<span class="hiddenWord__holder" data-id="hiddenWord__holder"></span>';
 
     this.parent.appendChild(divElFooter);
@@ -65,7 +71,7 @@ export default class GameWindow {
     }
     if (!isIt) {
       this.errorsCounter += 1;
-      new CreatGallow().draw(this.errorsCounter);
+      new CreatGallow(this.parent, this.word, this.clickedLetters, this.level, this.showedCounter).draw(this.errorsCounter);
     }
   }
 
@@ -81,5 +87,9 @@ export default class GameWindow {
 
   showHiddenWord(showLetter, showLetterNumber) {
     this.hiddenWordHolder.children[showLetterNumber].textContent = showLetter;
+    this.showedCounter += 1;
+    if (this.showedCounter === this.word.length) {
+      new AdditionalFunctions(null, this.parent).createFinishWindow(true, this.word, this.clickedLetters, this.level, this.showedCounter);
+    }
   }
 }

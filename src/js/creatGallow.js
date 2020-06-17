@@ -1,6 +1,14 @@
+import AdditionalFunctions from './additionalFunctions';
+
 export default class CreatGallow {
-  constructor() {
+  constructor(parent, word, clickedLetters, level, showedCounter) {
+    this.parent = parent;
     this.gallowHolder = document.querySelector('[data-id=gallow__holder]');
+    this.word = word;
+    this.clickedLetters = clickedLetters;
+    this.level = level;
+    this.showedCounter = showedCounter;
+    this.letters__holder = document.querySelector('[data-id=letters__holder]');
   }
 
   create() {
@@ -44,20 +52,22 @@ export default class CreatGallow {
           this.animation(points, ctx);
           break;
         case 3:
+          // Поперечная перекладина
           points = [
             { x: this.coordinatessArr[10], y: this.coordinatessArr[20] },
-            { x: this.coordinatessArr[30], y: 0 - 2 },
+            { x: this.coordinatessArr[30], y: 0 - 3 },
           ];
           this.animation(points, ctx);
           break;
         case 4:
           // Петля
           ctx.beginPath();
-          ctx.arc(this.coordinatessArr[60], this.coordinatessArr[30], this.coordinatessArr[5],
+          ctx.arc(this.coordinatessArr[60], this.coordinatessArr[30 - 1], this.coordinatessArr[5],
             0, Math.PI * 2, true);
           ctx.stroke();
           break;
         case 5:
+          // Тумба
           points = [
             { x: this.coordinatessArr[45], y: this.coordinatessArr[100] },
             { x: this.coordinatessArr[50], y: this.coordinatessArr[90] },
@@ -70,25 +80,31 @@ export default class CreatGallow {
           // Человек
           // Голова
           ctx.beginPath();
-          ctx.arc(this.coordinatessArr[60], this.coordinatessArr[31], this.coordinatessArr[4],
+          ctx.arc(this.coordinatessArr[60], this.coordinatessArr[30], this.coordinatessArr[4],
             0, Math.PI * 2, true); // Внешняя окружность
+          ctx.stroke();
           // Туловище
+          // eslint-disable-next-line no-case-declarations
+          const lockBlock = document.createElement('div');
+          lockBlock.className = 'lockBlock';
+          this.letters__holder.appendChild(lockBlock);
+
           points = [
-            { x: this.coordinatessArr[60], y: this.coordinatessArr[35] },
+            { x: this.coordinatessArr[60], y: this.coordinatessArr[35 - 1] },
             { x: this.coordinatessArr[60], y: this.coordinatessArr[60] },
           ];
           this.animation(points, ctx);
           // Руки
           setTimeout(() => {
             points = [
-              { x: this.coordinatessArr[60], y: this.coordinatessArr[35] },
+              { x: this.coordinatessArr[60], y: this.coordinatessArr[35 - 1] },
               { x: this.coordinatessArr[70], y: this.coordinatessArr[55] },
             ];
             this.animation(points, ctx);
           }, 400);
           setTimeout(() => {
             points = [
-              { x: this.coordinatessArr[60], y: this.coordinatessArr[35] },
+              { x: this.coordinatessArr[60], y: this.coordinatessArr[35 - 1] },
               { x: this.coordinatessArr[50], y: this.coordinatessArr[55] },
             ];
             this.animation(points, ctx);
@@ -96,17 +112,18 @@ export default class CreatGallow {
           // Ноги
           setTimeout(() => {
             points = [
-              { x: this.coordinatessArr[60], y: this.coordinatessArr[60] },
+              { x: this.coordinatessArr[60], y: this.coordinatessArr[60 - 1] },
               { x: this.coordinatessArr[55], y: this.coordinatessArr[85] },
             ];
             this.animation(points, ctx);
           }, 1200);
           setTimeout(() => {
             points = [
-              { x: this.coordinatessArr[60], y: this.coordinatessArr[60] },
+              { x: this.coordinatessArr[60], y: this.coordinatessArr[60 - 1] },
               { x: this.coordinatessArr[65], y: this.coordinatessArr[85] },
             ];
             this.animation(points, ctx);
+            new AdditionalFunctions(null, this.parent).createFinishWindow(false, this.word, this.clickedLetters, this.level, this.showedCounter);
           }, 1600);
           // Человек
           break;

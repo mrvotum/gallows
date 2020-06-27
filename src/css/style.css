@@ -318,6 +318,30 @@ input, div {
   /* Окно статистики */
 
 
+
+@media (max-width: 400px) {
+    .interTheWord {
+        flex-direction: column;
+        width: 90%;
+        min-width: 200px;
+    }
+
+    .interTheWord_content__holder:first-child {
+        width: 100%;
+        order: 2;
+    }
+    .interTheWord_content__holder:first-child::after {
+        top: calc(-30px);
+        width: 100%;
+        height: 1px;
+    }
+
+    .interTheWord_content__holder:last-child {
+        margin-bottom: 50px;
+    }
+}
+
+
 @font-face{
     font-family: 'Lato-Regular';
     font-weight: normal;

@@ -77,11 +77,12 @@ input, div {
 .wordInput:valid {
     border: 2px solid #2ecc71;
 }
-  
+
 .submit_btn {
     border: 0;
     background: none;
-    margin: 20px auto;
+    /* margin: 20px auto; */
+    font-size: 16px;
     text-align: center;
     border: 2px solid #2ecc71;
     padding: 10px 30px;
@@ -90,9 +91,60 @@ input, div {
     border-radius: 50px;
     transition: 0.25s;
     cursor: pointer;
+    margin-left: -50px;
 }
 .submit_btn:hover {
     background-color: #2ecc71;
+}
+
+.random_btn {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    padding: 9px;
+    fill: #fff;
+    border: 2px solid #2ecc71;
+    border-radius: 50%;
+    position: absolute;
+    margin-left: 10px;
+}
+.random_btn:hover {
+    cursor: pointer;
+    background-color: #2ecc71;
+}
+.random_btn:hover.random_btn::before{
+    position: absolute;
+    content: '';
+    top: -20px;
+    left: 18px;
+    width: 3px;
+    height: 20px;
+    background-color: #2ecc71;
+}
+
+.try_btn {
+    margin: 30px 50px;
+}
+
+.prompt {
+    position: absolute;
+    left: -165px;
+    top: -67px;
+    padding: 13px 0px;
+    color: #fff;
+    background-color: #2ecc71;
+    width: 230px;
+    border-radius: 50px;
+}
+
+.prompt-animate {
+    animation: prompt-animate 2000ms ease-out 0s forwards ;
+}
+@keyframes prompt-animate{
+    0% { opacity: 0; }
+    20% { opacity: 1;} 
+    80% { opacity: 1; }
+    100% { opacity: 1; }
 }
 
 .links_holder {

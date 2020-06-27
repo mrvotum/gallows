@@ -1,39 +1,283 @@
-// eslint-disable-next-line import/no-cycle
-import AdditionalFunctions from './additionalFunctions';
-
 export default class CreatGallow {
-  constructor(parent, word, clickedLetters, level, showedCounter) {
-    this.parent = parent;
+  constructor(level) {
     this.gallowHolder = document.querySelector('[data-id=gallow__holder]');
-    this.word = word;
-    this.clickedLetters = clickedLetters;
     this.level = level;
-    this.showedCounter = showedCounter;
     this.letters__holder = document.querySelector('[data-id=letters__holder]');
+    this.stopGame = false;
   }
 
-  create() {
-    this.createCanvas();
+  levelInstructor(partCounter) {
+    this.partCounter = partCounter;
+    switch (this.level) {
+      case 'easy':
+        this.drawEasy();
+        break;
+      case 'normal':
+        this.drawNormal();
+        break;
+      case 'hard':
+        this.drawHard();
+        break;
+      default:
+    }
   }
 
-  createCanvas() {
-    const canvasEl = document.createElement('canvas');
-    canvasEl.id = 'gallow';
-    canvasEl.setAttribute('width', this.gallowHolder.offsetWidth);
-    canvasEl.setAttribute('height', this.gallowHolder.offsetWidth);
-    canvasEl.innerHTML = '<span>Canvas не поддерживается</span>';
-
-    this.gallowHolder.appendChild(canvasEl);
-  }
-
-  draw(partCounter) {
+  drawEasy() {
     const canvas = document.getElementById('gallow');
     if (canvas.getContext) {
       this.createCoordinates(this.gallowHolder.offsetWidth);
 
       const ctx = canvas.getContext('2d');
       let points = [];
-      switch (partCounter) {
+      switch (this.partCounter) {
+        case 1:
+          // Земля
+          points = [
+            { x: 0, y: this.coordinatessArr[100] },
+            { x: this.coordinatessArr[100], y: this.coordinatessArr[100] },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 2:
+          // Основа
+          points = [
+            { x: this.coordinatessArr[10], y: this.coordinatessArr[100] },
+            { x: this.coordinatessArr[10], y: this.coordinatessArr[0] },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 3:
+          // Основа 2
+          points = [
+            { x: this.coordinatessArr[10], y: this.coordinatessArr[0 + 1] },
+            { x: this.coordinatessArr[60 + 1], y: this.coordinatessArr[0 + 1] },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 4:
+          // Поперечная перекладина
+          points = [
+            { x: this.coordinatessArr[10], y: this.coordinatessArr[20] },
+            { x: this.coordinatessArr[30], y: 0 + 2 },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 5:
+          // Верёвка
+          points = [
+            { x: this.coordinatessArr[60], y: this.coordinatessArr[0 + 1] },
+            { x: this.coordinatessArr[60], y: this.coordinatessArr[25] },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 6:
+          // Петля
+          ctx.beginPath();
+          ctx.arc(this.coordinatessArr[60], this.coordinatessArr[30 - 1], this.coordinatessArr[5],
+            0, Math.PI * 2, true);
+          ctx.stroke();
+          break;
+        case 7:
+          // Тумба
+          points = [
+            { x: this.coordinatessArr[45], y: this.coordinatessArr[100] },
+            { x: this.coordinatessArr[50], y: this.coordinatessArr[90] },
+            { x: this.coordinatessArr[70], y: this.coordinatessArr[90] },
+            { x: this.coordinatessArr[75], y: this.coordinatessArr[100] + 2 },
+          ];
+          this.animation(points, ctx);
+          break;
+        // Человек
+        case 8:
+          // Голова
+          ctx.beginPath();
+          ctx.arc(this.coordinatessArr[60], this.coordinatessArr[30], this.coordinatessArr[4],
+            0, Math.PI * 2, true); // Внешняя окружность
+          ctx.stroke();
+          break;
+        case 9:
+          // Туловище
+          points = [
+            { x: this.coordinatessArr[60], y: this.coordinatessArr[35 - 1] },
+            { x: this.coordinatessArr[60], y: this.coordinatessArr[60] },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 10:
+          // Руки
+          points = [
+            { x: this.coordinatessArr[60], y: this.coordinatessArr[35 - 1] },
+            { x: this.coordinatessArr[70], y: this.coordinatessArr[55] },
+          ];
+          this.animation(points, ctx);
+
+          setTimeout(() => {
+            points = [
+              { x: this.coordinatessArr[60], y: this.coordinatessArr[35 - 1] },
+              { x: this.coordinatessArr[50], y: this.coordinatessArr[55] },
+            ];
+            this.animation(points, ctx);
+          }, 400);
+          break;
+        case 11:
+          // Ноги
+          // eslint-disable-next-line no-case-declarations
+          const lockBlock = document.createElement('div');
+          lockBlock.className = 'lockBlock';
+          this.letters__holder.appendChild(lockBlock);
+
+          this.stopGame = true;
+
+          points = [
+            { x: this.coordinatessArr[60], y: this.coordinatessArr[60 - 1] },
+            { x: this.coordinatessArr[65], y: this.coordinatessArr[85] },
+          ];
+          this.animation(points, ctx);
+
+          setTimeout(() => {
+            points = [
+              { x: this.coordinatessArr[60], y: this.coordinatessArr[60 - 1] },
+              { x: this.coordinatessArr[55], y: this.coordinatessArr[85] },
+            ];
+            this.animation(points, ctx);
+          }, 400);
+          break;
+        default:
+          this.returnGameStatus();
+      }
+    }
+  }
+
+  drawNormal() {
+    const canvas = document.getElementById('gallow');
+    if (canvas.getContext) {
+      this.createCoordinates(this.gallowHolder.offsetWidth);
+
+      const ctx = canvas.getContext('2d');
+      let points = [];
+      switch (this.partCounter) {
+        case 1:
+          // Земля
+          points = [
+            { x: 0, y: this.coordinatessArr[100] },
+            { x: this.coordinatessArr[100], y: this.coordinatessArr[100] },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 2:
+          // Основа
+          points = [
+            { x: this.coordinatessArr[10], y: this.coordinatessArr[100] },
+            { x: this.coordinatessArr[10], y: this.coordinatessArr[0] },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 3:
+          // Основа 2
+          points = [
+            { x: this.coordinatessArr[10], y: this.coordinatessArr[0 + 1] },
+            { x: this.coordinatessArr[60 + 1], y: this.coordinatessArr[0 + 1] },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 4:
+          // Поперечная перекладина
+          points = [
+            { x: this.coordinatessArr[10], y: this.coordinatessArr[20] },
+            { x: this.coordinatessArr[30], y: 0 + 2 },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 5:
+          // Верёвка
+          points = [
+            { x: this.coordinatessArr[60], y: this.coordinatessArr[0 + 1] },
+            { x: this.coordinatessArr[60], y: this.coordinatessArr[25] },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 6:
+          // Петля
+          ctx.beginPath();
+          ctx.arc(this.coordinatessArr[60], this.coordinatessArr[30 - 1], this.coordinatessArr[5],
+            0, Math.PI * 2, true);
+          ctx.stroke();
+          break;
+        case 7:
+          // Тумба
+          points = [
+            { x: this.coordinatessArr[45], y: this.coordinatessArr[100] },
+            { x: this.coordinatessArr[50], y: this.coordinatessArr[90] },
+            { x: this.coordinatessArr[70], y: this.coordinatessArr[90] },
+            { x: this.coordinatessArr[75], y: this.coordinatessArr[100] + 2 },
+          ];
+          this.animation(points, ctx);
+          break;
+        case 8:
+          // Человек
+          // Голова
+          ctx.beginPath();
+          ctx.arc(this.coordinatessArr[60], this.coordinatessArr[30], this.coordinatessArr[4],
+            0, Math.PI * 2, true); // Внешняя окружность
+          ctx.stroke();
+          // Туловище
+          // eslint-disable-next-line no-case-declarations
+          const lockBlock = document.createElement('div');
+          lockBlock.className = 'lockBlock';
+          this.letters__holder.appendChild(lockBlock);
+
+          points = [
+            { x: this.coordinatessArr[60], y: this.coordinatessArr[35 - 1] },
+            { x: this.coordinatessArr[60], y: this.coordinatessArr[60] },
+          ];
+          this.animation(points, ctx);
+          // Руки
+          setTimeout(() => {
+            points = [
+              { x: this.coordinatessArr[60], y: this.coordinatessArr[35 - 1] },
+              { x: this.coordinatessArr[70], y: this.coordinatessArr[55] },
+            ];
+            this.animation(points, ctx);
+          }, 400);
+          setTimeout(() => {
+            points = [
+              { x: this.coordinatessArr[60], y: this.coordinatessArr[35 - 1] },
+              { x: this.coordinatessArr[50], y: this.coordinatessArr[55] },
+            ];
+            this.animation(points, ctx);
+          }, 800);
+          // Ноги
+          setTimeout(() => {
+            points = [
+              { x: this.coordinatessArr[60], y: this.coordinatessArr[60 - 1] },
+              { x: this.coordinatessArr[55], y: this.coordinatessArr[85] },
+            ];
+            this.animation(points, ctx);
+          }, 1200);
+          setTimeout(() => {
+            points = [
+              { x: this.coordinatessArr[60], y: this.coordinatessArr[60 - 1] },
+              { x: this.coordinatessArr[65], y: this.coordinatessArr[85] },
+            ];
+            this.animation(points, ctx);
+          }, 1600);
+          // Человек
+          this.stopGame = true;
+          break;
+        default:
+          this.returnGameStatus();
+      }
+    }
+  }
+
+  drawHard() {
+    const canvas = document.getElementById('gallow');
+    if (canvas.getContext) {
+      this.createCoordinates(this.gallowHolder.offsetWidth);
+
+      const ctx = canvas.getContext('2d');
+      let points = [];
+      switch (this.partCounter) {
         case 1:
           // Земля
           points = [
@@ -124,12 +368,13 @@ export default class CreatGallow {
               { x: this.coordinatessArr[65], y: this.coordinatessArr[85] },
             ];
             this.animation(points, ctx);
-            // eslint-disable-next-line max-len
-            new AdditionalFunctions(null, this.parent).createFinishWindow(false, this.word, this.clickedLetters, this.level, this.showedCounter);
+            return false;
           }, 1600);
           // Человек
+          this.stopGame = true;
           break;
         default:
+          this.returnGameStatus();
       }
     }
   }
@@ -181,5 +426,9 @@ export default class CreatGallow {
 
       requestAnimationFrame(animate.bind(null, coords, index + 1));
     }(createCoords(points), 1));
+  }
+
+  returnGameStatus() {
+    return this.stopGame;
   }
 }

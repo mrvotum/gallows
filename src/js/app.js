@@ -1,4 +1,4 @@
-// import Widget from './widget';
+import Widget from './widget';
 
-// const widget = new Widget();
-// widget.create();
+const widget = new Widget();
+widget.create();

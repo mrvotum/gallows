@@ -3,7 +3,7 @@ body {
     margin: 0;
     font-family: 'Lato-Regular';
 }
-div {
+div, form {
     box-sizing: border-box;
 }
 span, p, h1, h2, h3, h4, h5, h6,
@@ -320,10 +320,27 @@ input, div {
 
 
 @media (max-width: 400px) {
+    body {
+        background-color: #191919;
+    }
+    .whiteBG {
+        transition: 0.9s;
+        background-color: #fff;
+    }
+    .darkBG {
+        transition: 0.5s;
+        background-color: #191919;
+    }
+
     .interTheWord {
+        transform: translate(0, 0);
+        left: 0;
+        top: 0;
+        margin-left: calc((100% - 310px) / 2);
+        margin-top: 50%;
         flex-direction: column;
-        width: 90%;
-        min-width: 200px;
+        min-width: 310px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
     .interTheWord_content__holder:first-child {
@@ -338,6 +355,30 @@ input, div {
 
     .interTheWord_content__holder:last-child {
         margin-bottom: 50px;
+    }
+
+    .links_holder {
+        flex-direction: row;
+        justify-content: space-between;
+        padding-top: 20px;
+    }
+
+    .widget__header {
+        flex-direction: column;
+    }
+
+    .letters__holder,
+    .gallow__holder {
+        width: 100%;
+    }
+
+    .statisticWindow {
+        width: 90%;
+    }
+
+    .statisticInfo:last-child {
+        /* margin-bottom: 20px; */
+        color: red;
     }
 }
 

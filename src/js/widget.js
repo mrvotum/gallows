@@ -27,6 +27,7 @@ export default class Widget {
       if (this.validateTheWord(word)) {
         this.createGameWindowFunc(word.value.toLowerCase());
         this.interTheWordWIndow.remove();
+        document.body.classList.add('whiteBG');
       }
     });
 
@@ -54,6 +55,7 @@ export default class Widget {
 
       this.createGameWindowFunc(wordsArr[this.randomWord()]);
       this.interTheWordWIndow.remove();
+      document.body.classList.add('whiteBG');
     });
   }
 
@@ -97,7 +99,7 @@ export default class Widget {
         </div>
         <div class="interTheWord_content__holder">
       <div class="interTheWord_title">
-        <h3 class="tittle">Уровень сложности:<h3>
+        <h3 class="tittle">Уровень сложности:</h3>
       </div>
       <div class="interTheWord_content links_holder">
         <input class="radio_btn" type="radio" value="easy" name="level" id="easy">
@@ -188,6 +190,7 @@ export default class Widget {
       statisticWindow.remove();
 
       this.create();
+      document.body.classList.add('darkBG');
     });
   }
   // Additional function

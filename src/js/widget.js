@@ -27,7 +27,7 @@ export default class Widget {
       if (this.validateTheWord(word)) {
         this.createGameWindowFunc(word.value.toLowerCase());
         this.interTheWordWIndow.remove();
-        document.body.classList.add('whiteBG');
+        document.body.className = 'whiteBG'; // classList.add('whiteBG');
       }
     });
 
@@ -55,7 +55,7 @@ export default class Widget {
 
       this.createGameWindowFunc(wordsArr[this.randomWord()]);
       this.interTheWordWIndow.remove();
-      document.body.classList.add('whiteBG');
+      document.body.className = 'whiteBG'; // classList.add('whiteBG');
     });
   }
 
